@@ -8,9 +8,13 @@ const Row = styled.div`
 `;
 
 const Board = ({ board }) => {
-  return board.map(rows => {
+  return board.map((rows, rowIndex) => {
     return (
-      <Row rowCount={rows.length}>{rows.map(row => <Tile tile={row} />)}</Row>
+      <Row key={`r_${rowIndex}`} rowCount={rows.length}>
+        {rows.map((row, cellIndex) => (
+          <Tile key={`c_${cellIndex}`} tile={row} />
+        ))}
+      </Row>
     );
   });
 };
