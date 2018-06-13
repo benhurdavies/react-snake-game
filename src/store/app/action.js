@@ -12,14 +12,22 @@ export function loadThemes() {
   };
 }
 
-function applyThemeSuccess(theme) {
-  return { type: APPLY_THEME_SUCCESS, theme };
+function applyThemeSuccess(theme, themeName) {
+  return { type: APPLY_THEME_SUCCESS, theme, themeName };
 }
 
 export function applyDefaultTheme() {
   return (dispatch, getState) => {
     const state = getState();
-    const theme = themes[state.app.themes[0].value];
-    return dispatch(applyThemeSuccess(theme));
+    const themeName = state.app.themes[0].value;
+    const theme = themes[themeName];
+    return dispatch(applyThemeSuccess(theme, themeName));
+  };
+}
+
+export function applyNewTheme(themeName) {
+  return dispatch => {
+    const theme = themes[themeName];
+    return dispatch(applyThemeSuccess(theme, themeName));
   };
 }
