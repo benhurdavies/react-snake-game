@@ -10,7 +10,7 @@ import ThemeChange from '../components/ThemeChange';
 import { applyNewTheme } from '../store/app/action';
 
 const StyleToolbar = styled(AppBar)`
-  .MuiToolbar-root-36 {
+  .toolbar {
     min-height: 50px;
   }
 `;
@@ -24,7 +24,7 @@ class Header extends Component {
     return (
       <div>
         <StyleToolbar position="static" color="primary">
-          <Toolbar>
+          <Toolbar className="toolbar">
             <Typography variant="title" color="inherit">
               Snake
             </Typography>

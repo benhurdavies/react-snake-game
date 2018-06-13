@@ -1,5 +1,5 @@
-import grey from '@material-ui/core/colors/purple';
-import brown from '@material-ui/core/colors/green';
+import grey from '@material-ui/core/colors/grey';
+import brown from '@material-ui/core/colors/brown';
 
 export default {
   tileSize: 50,
@@ -10,14 +10,14 @@ export default {
   'material-ui': {
     palette: {
       primary: {
-        light: grey[300],
-        main: grey[500],
-        dark: grey[700]
-      },
-      secondary: {
         light: brown[300],
         main: brown[500],
         dark: brown[700]
+      },
+      secondary: {
+        light: grey[300],
+        main: grey[500],
+        dark: grey[700]
       }
     }
   }

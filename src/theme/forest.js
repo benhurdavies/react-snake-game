@@ -1,4 +1,4 @@
-import purple from '@material-ui/core/colors/purple';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 import green from '@material-ui/core/colors/green';
 
 export default {
@@ -10,9 +10,9 @@ export default {
   'material-ui': {
     palette: {
       primary: {
-        light: purple[300],
-        main: purple[500],
-        dark: purple[700]
+        light: lightBlue[300],
+        main: lightBlue[500],
+        dark: lightBlue[700]
       },
       secondary: {
         light: green[300],
