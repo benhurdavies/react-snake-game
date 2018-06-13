@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
 
 import Board from '../components/Board';
-import DefaultTheme from '../theme/default';
 import { initializeBoard } from '../store/board/action';
 
 const StyleGame = styled.div`
@@ -18,13 +17,13 @@ class Game extends Component {
     const boardWidth = window.innerWidth;
     const boardHeight = window.innerHeight;
     this.props.dispatch(
-      initializeBoard(boardWidth, boardHeight, DefaultTheme.tileSize)
+      initializeBoard(boardWidth, boardHeight, this.props.theme.tileSize)
     );
   }
 
   render() {
     return (
-      <ThemeProvider theme={DefaultTheme}>
+      <ThemeProvider theme={this.props.theme}>
         <StyleGame rowTileLength={this.props.rowTileLength}>
           <Board board={this.props.board} />
         </StyleGame>
@@ -36,7 +35,8 @@ class Game extends Component {
 function mapStateToProps(state) {
   return {
     board: state.board,
-    rowTileLength: state.board[0].length
+    rowTileLength: state.board[0].length,
+    theme: state.app.theme
   };
 }
 
