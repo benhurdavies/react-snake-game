@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
 
 import Board from '../components/Board';
-import { initializeBoard } from '../store/board/action';
+import { initializeGame } from '../store/app/action';
 
 const StyleGame = styled.div`
   width: ${({ theme, rowTileLength }) => rowTileLength * theme.tileSize}px;
@@ -17,7 +17,7 @@ class Game extends Component {
     const boardWidth = window.innerWidth;
     const boardHeight = window.innerHeight;
     this.props.dispatch(
-      initializeBoard(boardWidth, boardHeight, this.props.theme.tileSize)
+      initializeGame(boardWidth, boardHeight, this.props.theme.tileSize)
     );
   }
 

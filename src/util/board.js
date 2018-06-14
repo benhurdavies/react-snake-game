@@ -15,13 +15,11 @@ export function getBoard(screenWidth, screenHeight, tileSize) {
   return board;
 }
 
-function defaultTile(x, y) {
+export function defaultTile(x, y) {
   return {
-    id: tileId(x, y),
+    id: `${x}|${y}`,
     aboveIt: null,
     x,
     y
   };
 }
-
-const tileId = (x, y) => `${x}|${y}`;

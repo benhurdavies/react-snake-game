@@ -5,6 +5,7 @@ export default {
   tileSize: 50,
   tileColor: '#64DD17',
   'tileColor-alternate': '#76FF03',
+  snakeColor: 'black',
 
   // material design theme
   'material-ui': {
