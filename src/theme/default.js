@@ -2,7 +2,7 @@ import grey from '@material-ui/core/colors/grey';
 import brown from '@material-ui/core/colors/brown';
 
 export default {
-  tileSize: 50,
+  tileSize: 30,
   tileColor: '#757575',
   'tileColor-alternate': '#616161',
   snakeColor: 'black',
