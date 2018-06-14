@@ -25,7 +25,7 @@ class Game extends Component {
     const boardWidth = window.innerWidth;
     const boardHeight = window.innerHeight;
     this.props.dispatch(
-      initializeGame(boardWidth, boardHeight, this.props.theme.tileSize)
+      initializeGame(boardWidth, boardHeight - 50, this.props.theme.tileSize)
     );
     document.addEventListener('keydown', this.handleKeyPress, false);
   }
