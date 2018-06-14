@@ -25,6 +25,7 @@ export function defaultSnakeBody(x, y) {
   return {
     x,
     y,
-    id: `${x}|${y}`
+    id: `${x}|${y}`,
+    name: 'snake'
   };
 }
