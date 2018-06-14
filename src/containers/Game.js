@@ -5,12 +5,20 @@ import styled from 'styled-components';
 
 import Board from '../components/Board';
 import { initializeGame } from '../store/app/action';
+import { moveSnake } from '../store/snake/action';
 
 const StyleGame = styled.div`
   width: ${({ theme, rowTileLength }) => rowTileLength * theme.tileSize}px;
   margin-left: auto;
   margin-right: auto;
 `;
+
+const whitelist = {
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  ArrowRight: 'right',
+  ArrowLeft: 'left'
+};
 
 class Game extends Component {
   componentDidMount() {
@@ -19,7 +27,15 @@ class Game extends Component {
     this.props.dispatch(
       initializeGame(boardWidth, boardHeight, this.props.theme.tileSize)
     );
+    document.addEventListener('keydown', this.handleKeyPress, false);
   }
+
+  handleKeyPress = event => {
+    const key = event.key;
+    if (whitelist[key]) {
+      this.props.dispatch(moveSnake(whitelist[key]));
+    }
+  };
 
   render() {
     return (
@@ -29,6 +45,10 @@ class Game extends Component {
         </StyleGame>
       </ThemeProvider>
     );
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
   }
 }
 
