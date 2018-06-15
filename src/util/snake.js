@@ -1,4 +1,4 @@
-import { coordinateForMove } from './helper';
+import { coordinateForMove } from "./helper";
 
 export function createSnake(board, snakeSize = 4) {
   const xMax = board[0].length;
@@ -20,21 +20,15 @@ export function createSnakeChanges(board, snake) {
   });
 }
 
-// export function moveSnake(board, snake, direction) {
-//   switch (direction) {
-//     case 'right':
-//       return moveSnakeRight(board, snake, direction);
-//     default:
-//       throw Error('Not implemented direction');
-//   }
-// }
-
 export function moveSnake(board, snake, direction) {
   const newSnake = [...snake];
   const oldHead = newSnake.pop();
   const oldHeadToBody = defaultSnakeBody(oldHead.x, oldHead.y);
   const coordinate = coordinateForMove(oldHead.x, oldHead.y, direction);
-  const newHead = snakeHead(defaultSnakeBody(coordinate.x, coordinate.y));
+  const newHead = snakeHead(
+    defaultSnakeBody(coordinate.x, coordinate.y),
+    direction
+  );
   return {
     snake: [...newSnake.slice(1), oldHeadToBody, newHead],
     changes: [
@@ -50,7 +44,7 @@ function defaultSnakeBody(x, y) {
     x,
     y,
     id: `${x}|${y}`,
-    name: 'snake'
+    name: "snake"
   };
 }
 
@@ -59,7 +53,7 @@ function snakeTail(snakeBody) {
   return snakeBody;
 }
 
-function snakeHead(snakeBody, towards = 'right') {
+function snakeHead(snakeBody, towards = "right") {
   snakeBody.isHead = true;
   snakeBody.towards = towards;
   return snakeBody;
