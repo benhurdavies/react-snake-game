@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Stage, Layer, Rect, Text } from "react-konva";
+import { connect } from "react-redux";
+import { Stage, Layer } from "react-konva";
 import styled from "styled-components";
 
 import Background from "../components/game/Background";
@@ -173,9 +174,9 @@ class GameApp extends Component {
       <StyleContainer>
         <Stage width={gameParam.width} height={gameParam.height}>
           <Layer>
-            <Background width={gameParam.width} height={gameParam.height} />
-            <Snake snake={this.state.snake} />
-            <Food {...this.state.food} />
+            <Background width={gameParam.width} height={gameParam.height} theme={this.props.theme}  />
+            <Snake snake={this.state.snake} theme={this.props.theme}  />
+            <Food {...this.state.food} theme={this.props.theme} />
           </Layer>
         </Stage>
       </StyleContainer>
@@ -214,4 +215,10 @@ function snakeHead(snakeBody, towards = "right") {
   return snakeBody;
 }
 
-export default GameApp;
+function mapStateToProps(state) {
+  return {
+    theme: state.app.theme
+  };
+}
+
+export default connect(mapStateToProps)(GameApp);
