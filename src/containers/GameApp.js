@@ -28,8 +28,8 @@ const gameParam = {
   }
 };
 
-gameParam.widthInBlocks = gameParam.width / gameParam.blockSize;
-gameParam.heightInBlocks = gameParam.height / gameParam.blockSize;
+gameParam.widthInBlocks = Math.floor(gameParam.width / gameParam.blockSize);
+gameParam.heightInBlocks = Math.floor(gameParam.height / gameParam.blockSize);
 
 const StyleContainer = styled.div`
   width: ${gameParam.width}px;
@@ -171,15 +171,11 @@ class GameApp extends Component {
 
   render() {
     return (
-      <StyleContainer>
-        <Stage width={gameParam.width} height={gameParam.height}>
-          <Layer>
-            <Background width={gameParam.width} height={gameParam.height} theme={this.props.theme}  />
-            <Snake snake={this.state.snake} theme={this.props.theme}  />
-            <Food {...this.state.food} theme={this.props.theme} />
-          </Layer>
-        </Stage>
-      </StyleContainer>
+      <Layer>
+
+        <Snake snake={this.state.snake} theme={this.props.theme} />
+        <Food {...this.state.food} theme={this.props.theme} />
+      </Layer>
     );
   }
 }
