@@ -37,8 +37,9 @@ const StyleContainer = styled.div`
 class GameApp extends Component {
   constructor(props) {
     super(props);
+    const snake=this.initSnake();
     this.state = {
-      snake: this.initSnake(6)
+      snake
     };
     document.addEventListener("keydown", this.handleKeyPress, false);
   }
@@ -69,8 +70,12 @@ class GameApp extends Component {
     const { snake } = this.state;
     const newSnake = [...snake];
     const oldHead = newSnake.pop();
-    const oldHeadToBody = defaultSnakeBody(oldHead.x, oldHead.y);
     const coordinate = coordinateForMove(oldHead.x, oldHead.y, direction);
+    if (this.checkCollision(coordinate)) {
+      this.gameOver();
+      return;
+    }
+    const oldHeadToBody = defaultSnakeBody(oldHead.x, oldHead.y);
     const newHead = snakeHead(
       defaultSnakeBody(coordinate.x, coordinate.y),
       direction
@@ -79,10 +84,37 @@ class GameApp extends Component {
   };
 
   validateMove = direction => {
-    debugger;
     const snakeHead = this.state.snake[this.state.snake.length - 1];
     if (gameParam.invalidMove[snakeHead.towards] === direction) return false;
     else return true;
+  };
+
+  gameOver = () => {
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({ snake: this.initSnake() });
+  };
+
+  checkCollision = nextPosition => {
+    let IsOutOfArea = false;
+    let hitBody = false;
+    if (
+      nextPosition.x > gameParam.widthInBlocks ||
+      nextPosition.y > gameParam.heightInBlocks ||
+      nextPosition.x < 0 ||
+      nextPosition.y < 0
+    ) {
+      IsOutOfArea = true;
+    } else if (
+      this.state.snake.find(
+        snakeBody => snakeBody.id === `${nextPosition.x}|${nextPosition.y}`
+      )
+    ) {
+      hitBody = true;
+    }
+    return IsOutOfArea || hitBody;
   };
 
   render() {
