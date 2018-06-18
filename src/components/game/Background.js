@@ -1,20 +1,29 @@
-import React, { Component } from "react";
-import { Stage, Layer, Rect, Text } from "react-konva";
-import Konva from "konva";
+import React, { Component } from 'react';
+import { Stage, Layer, Rect, Text } from 'react-konva';
 
-const Background = ({ width, height }) => (
-  <Rect style={{backgroundColor:'red'}}
-    x={0}
-    y={0}
-    width={width}
-    height={height}
-    fill="#eee"
-    // fillLinearGradientStartPoint={{ x: 0, y:height }}
-    // fillLinearGradientEndPoint={{ x: width, y: height }}
-    // fillLinearGradientColorStops={[.5, "red", .5, "yellow",]}
-    // fillPatternX="500"
-    // fillPatternRepeat="repeat"
-  />
-);
+const Background = ({ widthInBlocks, heightInBlocks, size, theme }) => {
+  return Array(heightInBlocks)
+    .fill(0)
+    .map((_, y) => {
+      return Array(widthInBlocks)
+        .fill(0)
+        .map((_, x) => (
+          <Tile key={`t_${x}|${y}`} x={x} y={y} size={size} theme={theme} />
+        ));
+    });
+};
+
+const Tile = ({ x, y, size, theme }) => {
+  return (
+    <Rect
+      style={{ backgroundColor: 'red' }}
+      x={x * size}
+      y={y * size}
+      width={size}
+      height={size}
+      fill={(x + y) % 2 ? theme.tileColor : theme['tileColor-alternate']}
+    />
+  );
+};
 
 export default Background;
