@@ -10,13 +10,4 @@ after_success:
   - git remote rm origin
   - git remote add origin https://benhurdavies:${GITHUB_TOKEN}@github.com/benhurdavies/react-snake-game.git
   - npm run deploy
-# script:
-#   - yarn test
-#   - yarn build
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   github-token: $GITHUB_TOKEN
-#   local_dir: build
-#   on:
-#     branch: master
+  
