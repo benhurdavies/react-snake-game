@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Hearder />
         <Router>
-          <GameLayout path="/game" />
+          <GameLayout path="/" />
         </Router>
       </div>
     );
