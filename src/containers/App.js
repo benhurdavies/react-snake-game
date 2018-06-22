@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router } from '@reach/router';
+// import { Router } from '@reach/router';
 
 import GameLayout from './GameLayout';
 import Hearder from './Header';
