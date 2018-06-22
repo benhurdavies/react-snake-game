@@ -10,9 +10,10 @@ class App extends Component {
     return (
       <div className="App">
         <Hearder />
-        <Router>
+        {/* <Router>
           <GameLayout path="/" />
-        </Router>
+        </Router> */}
+        <GameLayout />
       </div>
     );
   }

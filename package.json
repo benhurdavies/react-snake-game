@@ -2,7 +2,7 @@
   "name": "react-snake-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://benhurdavies.github.io/react-snake-game",
+  "homepage": "http://benhurdavies.github.io/react-snake-game",
   "dependencies": {
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
