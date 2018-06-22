@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
 
-import GameApp from './GameApp';
+import GameLayout from './GameLayout';
 import Hearder from './Header';
 import withRoot from '../withRoot';
 
@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Hearder />
         <Router>
-          <GameApp path="/game" />
+          <GameLayout path="/game" />
         </Router>
       </div>
     );

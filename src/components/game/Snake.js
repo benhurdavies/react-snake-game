@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from 'react';
 
-import SnakeBody from "./SnakeBody";
+import SnakeBody from './SnakeBody';
 
 const Snake = ({ snake, theme }) => {
   return snake.map((snakeBody, index) => {

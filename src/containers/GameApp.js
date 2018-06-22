@@ -1,41 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Stage, Layer } from "react-konva";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Layer } from 'react-konva';
 
-import Background from "../components/game/Background";
-import Food from "../components/game/Food";
-import Snake from "../components/game/Snake";
+import Food from '../components/game/Food';
+import Snake from '../components/game/Snake';
+import { updateScore, restScore } from '../store/game/action';
 
-import { coordinateForMove, getRandomPosition } from "../util/helper";
-
-const gameParam = {
-  blockSize: 20,
-  width: window.innerWidth - 50,
-  height: window.innerHeight - 50,
-  initialFrameLegth: 200,
-  keysWhitelist: {
-    ArrowUp: "up",
-    ArrowDown: "down",
-    ArrowRight: "right",
-    ArrowLeft: "left"
-  },
-  invalidMove: {
-    up: "down",
-    down: "up",
-    right: "left",
-    left: "right"
-  }
-};
-
-gameParam.widthInBlocks = gameParam.width / gameParam.blockSize;
-gameParam.heightInBlocks = gameParam.height / gameParam.blockSize;
-
-const StyleContainer = styled.div`
-  width: ${gameParam.width}px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+import { coordinateForMove, getRandomPosition } from '../util/helper';
 
 class GameApp extends Component {
   constructor(props) {
@@ -45,32 +16,35 @@ class GameApp extends Component {
       snake: snake,
       food: this.newFood(snake)
     };
-    document.addEventListener("keydown", this.handleKeyPress, false);
+    document.addEventListener('keydown', this.handleKeyPress, false);
     this.gameLoop();
   }
 
   handleKeyPress = event => {
     const key = event.key;
-    if (gameParam.keysWhitelist[key]) {
-      this.moveSnake(gameParam.keysWhitelist[key]);
+    const { params } = this.props;
+    if (params.keysWhitelist[key]) {
+      this.moveSnake(params.keysWhitelist[key]);
     }
   };
 
   initSnake(snakeSize = 4) {
-    const snakeY = Math.floor(gameParam.heightInBlocks / 2);
+    const { params } = this.props;
+    const snakeY = Math.floor(params.heightInBlocks / 2);
     const snakeTailX =
-      Math.floor(gameParam.widthInBlocks / 2) - Math.floor(snakeSize / 2);
+      Math.floor(params.widthInBlocks / 2) - Math.floor(snakeSize / 2);
     let snake = Array(snakeSize);
     for (let x = snakeTailX, i = 0; i < snakeSize; x++, i++) {
-      snake[i] = defaultSnakeBody(x, snakeY);
-      if (i === 0) snakeTail(snake[i]);
-      else if (i === snakeSize - 1) snakeHead(snake[i]);
+      snake[i] = this.defaultSnakeBody(x, snakeY);
+      if (i === 0) this.snakeTail(snake[i]);
+      else if (i === snakeSize - 1) this.snakeHead(snake[i]);
     }
     return snake;
   }
 
   gameLoop = () => {
     const snakeHead = this.state.snake[this.state.snake.length - 1];
+    const { params } = this.props;
     const nextPosition = coordinateForMove(
       snakeHead.x,
       snakeHead.y,
@@ -81,7 +55,7 @@ class GameApp extends Component {
       return;
     } else {
       this.moveSnake(snakeHead.towards);
-      let timeout = setTimeout(this.gameLoop, gameParam.initialFrameLegth);
+      setTimeout(this.gameLoop, params.initialFrameLegth);
     }
   };
 
@@ -92,9 +66,9 @@ class GameApp extends Component {
     const newSnake = [...snake];
     const oldHead = newSnake.pop();
     const nextPosition = coordinateForMove(oldHead.x, oldHead.y, direction);
-    const oldHeadToBody = defaultSnakeBody(oldHead.x, oldHead.y);
-    const newHead = snakeHead(
-      defaultSnakeBody(nextPosition.x, nextPosition.y),
+    const oldHeadToBody = this.defaultSnakeBody(oldHead.x, oldHead.y);
+    const newHead = this.snakeHead(
+      this.defaultSnakeBody(nextPosition.x, nextPosition.y),
       direction
     );
     if (this.goingToEat(nextPosition)) {
@@ -111,25 +85,33 @@ class GameApp extends Component {
   };
 
   validateMove = direction => {
+    const { params } = this.props;
     const snakeHead = this.state.snake[this.state.snake.length - 1];
-    if (gameParam.invalidMove[snakeHead.towards] === direction) return false;
+    if (params.invalidMove[snakeHead.towards] === direction) return false;
     else return true;
   };
 
   gameOver = () => {
     this.reset();
+    this.start();
   };
 
   reset = () => {
     this.setState({ snake: this.initSnake() });
   };
 
+  start = () => {
+    this.gameLoop();
+    this.props.dispatch(restScore());
+  };
+
   checkCollision = nextPosition => {
     let IsOutOfArea = false;
+    const { params } = this.props;
     let hitBody = false;
     if (
-      nextPosition.x > gameParam.widthInBlocks ||
-      nextPosition.y > gameParam.heightInBlocks ||
+      nextPosition.x > params.widthInBlocks ||
+      nextPosition.y > params.heightInBlocks ||
       nextPosition.x < 0 ||
       nextPosition.y < 0
     ) {
@@ -145,9 +127,10 @@ class GameApp extends Component {
   };
 
   newFood = snake => {
+    const { params } = this.props;
     var newPosition = getRandomPosition(
-      gameParam.widthInBlocks,
-      gameParam.heightInBlocks
+      params.widthInBlocks,
+      params.heightInBlocks
     );
     if (
       snake.find(
@@ -156,63 +139,61 @@ class GameApp extends Component {
     ) {
       return this.newFood();
     } else {
-      return defaultFood(newPosition.x, newPosition.y);
+      return this.defaultFood(newPosition.x, newPosition.y);
     }
   };
 
   ateFood = () => {
     const { snake } = this.state;
     this.setState({ food: this.newFood(snake) });
+    this.props.dispatch(updateScore());
+  };
+
+  defaultSnakeBody = (x, y) => {
+    const { params } = this.props;
+    return {
+      x,
+      y,
+      id: `s_${x}|${y}`,
+      name: 'snake',
+      blockSize: params.blockSize
+    };
+  };
+
+  defaultFood = (x, y) => {
+    const { params } = this.props;
+    return {
+      x,
+      y,
+      id: `f_${x}|${y}`,
+      name: 'food',
+      blockSize: params.blockSize
+    };
+  };
+
+  snakeTail = snakeBody => {
+    snakeBody.isTail = true;
+    return snakeBody;
+  };
+
+  snakeHead = (snakeBody, towards = 'right') => {
+    snakeBody.isHead = true;
+    snakeBody.towards = towards;
+    return snakeBody;
   };
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyPress);
+    document.removeEventListener('keydown', this.handleKeyPress);
   }
 
   render() {
     return (
-      <StyleContainer>
-        <Stage width={gameParam.width} height={gameParam.height}>
-          <Layer>
-            <Background width={gameParam.width} height={gameParam.height} theme={this.props.theme}  />
-            <Snake snake={this.state.snake} theme={this.props.theme}  />
-            <Food {...this.state.food} theme={this.props.theme} />
-          </Layer>
-        </Stage>
-      </StyleContainer>
+      <Layer>
+        <Snake snake={this.state.snake} theme={this.props.theme} />
+        <Food {...this.state.food} theme={this.props.theme} />
+      </Layer>
     );
   }
-}
-
-function defaultSnakeBody(x, y) {
-  return {
-    x,
-    y,
-    id: `s_${x}|${y}`,
-    name: "snake",
-    blockSize: gameParam.blockSize
-  };
-}
-
-function defaultFood(x, y) {
-  return {
-    x,
-    y,
-    id: `f_${x}|${y}`,
-    name: "food",
-    blockSize: gameParam.blockSize
-  };
-}
-
-function snakeTail(snakeBody) {
-  snakeBody.isTail = true;
-  return snakeBody;
-}
-
-function snakeHead(snakeBody, towards = "right") {
-  snakeBody.isHead = true;
-  snakeBody.towards = towards;
-  return snakeBody;
 }
 
 function mapStateToProps(state) {

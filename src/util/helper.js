@@ -14,13 +14,15 @@ export function coordinateForMove(x, y, direction) {
       return { x, y: y - 1 };
     case 'down':
       return { x, y: y + 1 };
+    default:
+      throw Error(`Not implemented direction : ${direction}`);
   }
 }
 
-export function getRandomPosition(width,height) {
+export function getRandomPosition(width, height) {
   var x = random(1, width - 2);
   var y = random(1, height - 2);
-  return {x, y};
+  return { x, y };
 }
 
 function random(low, high) {

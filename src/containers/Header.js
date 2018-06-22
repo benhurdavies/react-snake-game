@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import ThemeChange from '../components/ThemeChange';
+import LiveScore from '../components/LiveScore';
 import { applyNewTheme } from '../store/app/action';
 
 const StyleToolbar = styled(AppBar)`
@@ -21,6 +22,7 @@ class Header extends Component {
   };
 
   render() {
+    const { game, themes, themeName } = this.props;
     return (
       <div>
         <StyleToolbar position="static" color="primary">
@@ -28,9 +30,13 @@ class Header extends Component {
             <Typography variant="title" color="inherit">
               Snake
             </Typography>
+            <LiveScore
+              currentScore={game.currentScore}
+              highScore={game.highScore}
+            />
             <ThemeChange
-              themes={this.props.themes}
-              themeName={this.props.themeName}
+              themes={themes}
+              themeName={themeName}
               handleChange={this.handleThemeChange}
             />
           </Toolbar>
@@ -43,7 +49,8 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
     themes: state.app.themes,
-    themeName: state.app.themeName
+    themeName: state.app.themeName,
+    game: state.game
   };
 }
 
