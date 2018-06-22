@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Rect } from "react-konva";
+import React from 'react';
+import { Rect } from 'react-konva';
 
-const SnakeBody = ({ x, y, width, height, blockSize,theme }) => (
+const SnakeBody = ({ x, y, width, height, blockSize, theme }) => (
   <Rect
     x={x * blockSize}
     y={y * blockSize}

@@ -4,6 +4,7 @@ import { Layer } from 'react-konva';
 
 import Food from '../components/game/Food';
 import Snake from '../components/game/Snake';
+import { updateScore, restScore } from '../store/game/action';
 
 import { coordinateForMove, getRandomPosition } from '../util/helper';
 
@@ -54,7 +55,7 @@ class GameApp extends Component {
       return;
     } else {
       this.moveSnake(snakeHead.towards);
-      let timeout = setTimeout(this.gameLoop, params.initialFrameLegth);
+      setTimeout(this.gameLoop, params.initialFrameLegth);
     }
   };
 
@@ -92,10 +93,16 @@ class GameApp extends Component {
 
   gameOver = () => {
     this.reset();
+    this.start();
   };
 
   reset = () => {
     this.setState({ snake: this.initSnake() });
+  };
+
+  start = () => {
+    this.gameLoop();
+    this.props.dispatch(restScore());
   };
 
   checkCollision = nextPosition => {
@@ -139,6 +146,7 @@ class GameApp extends Component {
   ateFood = () => {
     const { snake } = this.state;
     this.setState({ food: this.newFood(snake) });
+    this.props.dispatch(updateScore());
   };
 
   defaultSnakeBody = (x, y) => {

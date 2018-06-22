@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import React from 'react';
+import { Rect } from 'react-konva';
 
 const Background = ({ widthInBlocks, heightInBlocks, size, theme }) => {
   return Array(heightInBlocks)
