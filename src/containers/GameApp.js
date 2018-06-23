@@ -6,7 +6,7 @@ import Food from '../components/game/Food';
 import Snake from '../components/game/Snake';
 import { updateScore, restScore } from '../store/game/action';
 
-import { coordinateForMove, getRandomPosition } from '../util/helper';
+import { coordinateForMove, getRandomPosition, ontouch } from '../util/helper';
 
 class GameApp extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class GameApp extends Component {
       food: this.newFood(snake)
     };
     document.addEventListener('keydown', this.handleKeyPress, false);
+    ontouch(document, this.handleTouch);
     this.gameLoop();
   }
 
@@ -25,6 +26,12 @@ class GameApp extends Component {
     const { params } = this.props;
     if (params.keysWhitelist[key]) {
       this.moveSnake(params.keysWhitelist[key]);
+    }
+  };
+
+  handleTouch = (evt, dir, phase, swipetype, distance) => {
+    if (phase === 'end' && dir !== 'none') {
+      this.moveSnake(dir);
     }
   };
 
