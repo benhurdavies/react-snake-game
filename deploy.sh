@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$TRAVIS_BRANCH" == "prod" ]; then
+if [ "$TRAVIS_BRANCH" == "master" ]; then
   git config --global user.name "benhurdavies"
   git config --global user.email "benhurdavies@gmail.com"
   git remote rm origin
