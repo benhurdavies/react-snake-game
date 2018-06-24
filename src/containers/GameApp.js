@@ -6,7 +6,8 @@ import Food from '../components/game/Food';
 import Snake from '../components/game/Snake';
 import { updateScore, restScore } from '../store/game/action';
 
-import { coordinateForMove, getRandomPosition, ontouch } from '../util/helper';
+import { coordinateForMove, getRandomPosition } from '../util/helper';
+import {ontouch} from '../util/touchHandler';
 
 class GameApp extends Component {
   constructor(props) {
@@ -144,7 +145,7 @@ class GameApp extends Component {
         snakeBody => snakeBody.id === `s_${newPosition.x}|${newPosition.y}`
       )
     ) {
-      return this.newFood();
+      return this.newFood(snake);
     } else {
       return this.defaultFood(newPosition.x, newPosition.y);
     }
