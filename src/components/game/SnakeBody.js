@@ -1,7 +1,9 @@
 import React from 'react';
 import { Rect } from 'react-konva';
 
-const SnakeBody = ({ x, y, width, height, blockSize, theme }) => (
+import SnakeHead from './SnakeHead';
+
+const SnakeBody = ({ x, y, blockSize, theme }) => (
   <Rect
     x={x * blockSize}
     y={y * blockSize}
@@ -11,4 +13,10 @@ const SnakeBody = ({ x, y, width, height, blockSize, theme }) => (
   />
 );
 
-export default SnakeBody;
+function factory(props) {
+  if (props.isHead) {
+    return <SnakeHead {...props} />;
+  } else return <SnakeBody {...props} />;
+}
+
+export default factory;
