@@ -7,7 +7,7 @@ import Snake from '../components/game/Snake';
 import { updateScore, restScore } from '../store/game/action';
 
 import { coordinateForMove, getRandomPosition } from '../util/helper';
-import {ontouch} from '../util/touchHandler';
+import { ontouch } from '../util/touchHandler';
 
 class GameApp extends Component {
   constructor(props) {
@@ -118,8 +118,8 @@ class GameApp extends Component {
     const { params } = this.props;
     let hitBody = false;
     if (
-      nextPosition.x > params.widthInBlocks ||
-      nextPosition.y > params.heightInBlocks ||
+      nextPosition.x >= params.widthInBlocks ||
+      nextPosition.y >= params.heightInBlocks ||
       nextPosition.x < 0 ||
       nextPosition.y < 0
     ) {
