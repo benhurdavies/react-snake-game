@@ -34,7 +34,7 @@ Open your browser at `http://localhost:3000/`
 
 ### React and Redux
 
-* **create-react-app** - Facebook's [create-react-app](https://github.com/facebookincubator/create-react-app) is used to get a production-ready React application quickly off the ground. It configures things like Webpack and Babel, so you don't have to. In order to further customize this starter kit with some additional tools, like Sass, we leverage a fork of react-scripts, called [custom-react-scripts](https://github.com/kitze/custom-react-scripts).
+* **create-react-app** - Facebook's [create-react-app](https://github.com/facebookincubator/create-react-app) is used to get a production-ready React application quickly off the ground. It configures things like Webpack and Babel, so you don't have to.
 
 * **Redux** - We use [Redux](https://github.com/reactjs/redux) to manage complex application state. In the app, you'll find an example workflow to add items to a list.
 
