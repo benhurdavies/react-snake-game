@@ -63,7 +63,7 @@ Open your browser at `http://localhost:3000/`
 
 # Continuous Integration
 
-Travis CI runs tests on each branch. Successful merges to master are auto deployed to the [GitHub Pages](http://benhurdavies.github.io/react-snake-game). 
+Travis CI runs tests on each branch. Successful merges to master are auto deployed to the [GitHub Page](http://benhurdavies.github.io/react-snake-game). 
 ---
 
 Development is in progress and welcomes contributions.
