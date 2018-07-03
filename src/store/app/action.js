@@ -1,4 +1,5 @@
 import { LOAD_THEME, APPLY_THEME_SUCCESS } from '../actionType';
+import { invertColorBlackWhite } from '../../util/color';
 
 import themes from '../../theme';
 
@@ -21,6 +22,7 @@ export function applyDefaultTheme() {
     const state = getState();
     const themeName = state.app.themes[0].value;
     const theme = themes[themeName];
+    theme.snakeColorInvert = invertColorBlackWhite(theme.snakeColor);
     return dispatch(applyThemeSuccess(theme, themeName));
   };
 }
@@ -28,6 +30,7 @@ export function applyDefaultTheme() {
 export function applyNewTheme(themeName) {
   return dispatch => {
     const theme = themes[themeName];
+    theme.snakeColorInvert = invertColorBlackWhite(theme.snakeColor);
     return dispatch(applyThemeSuccess(theme, themeName));
   };
 }
