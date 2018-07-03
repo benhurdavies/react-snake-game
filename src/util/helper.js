@@ -32,3 +32,12 @@ export function getRandomPosition(width, height) {
 function random(low, high) {
   return Math.floor(Math.random() * (high - low + 1) + low);
 }
+
+const TO_RADIANS = Math.PI / 180;
+
+export const radianFromSide = {
+  left: 180 * TO_RADIANS,
+  right: 0 * TO_RADIANS,
+  up: 270 * TO_RADIANS,
+  down: 90 * TO_RADIANS
+};
