@@ -6,8 +6,8 @@ const StyleDiv = styled.div`
   padding: 5px;
   margin-left: auto;
   margin-right: auto;
-  width: 125px;
-  `;
+  width: 135px;
+`;
 
 const LiveScore = ({ currentScore, highScore }) => (
   <StyleDiv>
