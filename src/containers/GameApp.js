@@ -75,6 +75,7 @@ class GameApp extends Component {
     const oldHead = newSnake.pop();
     const nextPosition = coordinateForMove(oldHead.x, oldHead.y, direction);
     const oldHeadToBody = this.defaultSnakeBody(oldHead.x, oldHead.y);
+    this.snakeBodyCorner(oldHeadToBody, oldHead.towards, direction);
     const newHead = this.snakeHead(
       this.defaultSnakeBody(nextPosition.x, nextPosition.y),
       direction
@@ -166,6 +167,13 @@ class GameApp extends Component {
       name: 'snake',
       blockSize: params.blockSize
     };
+  };
+
+  snakeBodyCorner = (snakeBody, prevDirection, nextDirection) => {
+    if (prevDirection !== nextDirection) {
+      snakeBody.corner = `${prevDirection}-${nextDirection}`;
+    }
+    return snakeBody;
   };
 
   defaultFood = (x, y) => {
