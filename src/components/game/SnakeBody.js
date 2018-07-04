@@ -18,7 +18,6 @@ function factory(props) {
   if (props.isHead) {
     return <SnakeHead {...props} />;
   } else if (props.corner) {
-    debugger;
     return <SnakeCorner {...props} />;
   } else return <SnakeBody {...props} />;
 }

@@ -41,3 +41,14 @@ export const radianFromSide = {
   up: 270 * TO_RADIANS,
   down: 90 * TO_RADIANS
 };
+
+export const radianFromCorner = {
+  'left-down': 180 * TO_RADIANS,
+  'up-right': 180 * TO_RADIANS,
+  'right-up': 0 * TO_RADIANS,
+  'down-left': 0 * TO_RADIANS,
+  'right-down': 270 * TO_RADIANS,
+  'up-left': 270 * TO_RADIANS,
+  'down-right': 90 * TO_RADIANS,
+  'left-up': 90 * TO_RADIANS
+};
