@@ -6,7 +6,6 @@
   "dependencies": {
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
-    "@reach/router": "^1.1.0",
     "history": "^4.7.2",
     "konva": "^2.1.5",
     "react": "^16.4.0",
