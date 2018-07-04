@@ -3,13 +3,13 @@ export function coordinateForMove(x, y, direction) {
     case 'left':
       return {
         x: x - 1,
-        y
+        y,
       };
 
     case 'right':
       return {
         x: x + 1,
-        y
+        y,
       };
 
     case 'up':
@@ -39,7 +39,7 @@ export const radianFromSide = {
   left: 180 * TO_RADIANS,
   right: 0 * TO_RADIANS,
   up: 270 * TO_RADIANS,
-  down: 90 * TO_RADIANS
+  down: 90 * TO_RADIANS,
 };
 
 export const radianFromCorner = {
@@ -50,5 +50,5 @@ export const radianFromCorner = {
   'right-down': 270 * TO_RADIANS,
   'up-left': 270 * TO_RADIANS,
   'down-right': 90 * TO_RADIANS,
-  'left-up': 90 * TO_RADIANS
+  'left-up': 90 * TO_RADIANS,
 };
