@@ -75,6 +75,7 @@ class GameApp extends Component {
     const oldHead = newSnake.pop();
     const nextPosition = coordinateForMove(oldHead.x, oldHead.y, direction);
     const oldHeadToBody = this.defaultSnakeBody(oldHead.x, oldHead.y);
+    this.snakeBodyCorner(oldHeadToBody, oldHead.towards, direction);
     const newHead = this.snakeHead(
       this.defaultSnakeBody(nextPosition.x, nextPosition.y),
       direction
@@ -83,7 +84,11 @@ class GameApp extends Component {
       this.ateFood();
       this.setState({ snake: [...newSnake, oldHeadToBody, newHead] });
     } else {
-      this.setState({ snake: [...newSnake.slice(1), oldHeadToBody, newHead] });
+      const snakeBody = newSnake.slice(1);
+      const snakeTail = this.snakeTail(snakeBody.shift());
+      this.setState({
+        snake: [snakeTail, ...snakeBody, oldHeadToBody, newHead]
+      });
     }
   };
 
@@ -168,6 +173,13 @@ class GameApp extends Component {
     };
   };
 
+  snakeBodyCorner = (snakeBody, prevDirection, nextDirection) => {
+    if (prevDirection !== nextDirection) {
+      snakeBody.corner = `${prevDirection}-${nextDirection}`;
+    }
+    return snakeBody;
+  };
+
   defaultFood = (x, y) => {
     const { params } = this.props;
     return {
@@ -181,6 +193,7 @@ class GameApp extends Component {
 
   snakeTail = snakeBody => {
     snakeBody.isTail = true;
+    delete snakeBody.corner;
     return snakeBody;
   };
 

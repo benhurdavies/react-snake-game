@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Router } from '@reach/router';
 
 import GameLayout from './GameLayout';
 import Hearder from './Header';
@@ -10,9 +9,6 @@ class App extends Component {
     return (
       <div className="App">
         <Hearder />
-        {/* <Router>
-          <GameLayout path="/" />
-        </Router> */}
         <GameLayout />
       </div>
     );

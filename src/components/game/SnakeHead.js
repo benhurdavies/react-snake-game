@@ -3,7 +3,7 @@ import { Shape } from 'react-konva';
 
 import { radianFromSide } from '../../util/helper';
 
-const SnakeHead = ({ x, y, width, height, blockSize, theme, towards }) => (
+const SnakeHead = ({ x, y, blockSize, theme, towards }) => (
   <Shape
     x={x * blockSize}
     y={y * blockSize}

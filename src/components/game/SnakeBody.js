@@ -2,6 +2,7 @@ import React from 'react';
 import { Rect } from 'react-konva';
 
 import SnakeHead from './SnakeHead';
+import SnakeCorner from './SnakeCorner';
 
 const SnakeBody = ({ x, y, blockSize, theme }) => (
   <Rect
@@ -16,6 +17,8 @@ const SnakeBody = ({ x, y, blockSize, theme }) => (
 function factory(props) {
   if (props.isHead) {
     return <SnakeHead {...props} />;
+  } else if (props.corner) {
+    return <SnakeCorner {...props} />;
   } else return <SnakeBody {...props} />;
 }
 
