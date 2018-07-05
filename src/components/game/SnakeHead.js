@@ -1,7 +1,7 @@
 import React from 'react';
 import { Shape } from 'react-konva';
 
-import { radianFromSide } from '../../util/helper';
+import { radianFromSide, TO_RADIANS } from '../../util/helper';
 
 const SnakeHead = ({ x, y, blockSize, theme, towards }) => (
   <Shape
@@ -34,6 +34,7 @@ const SnakeHead = ({ x, y, blockSize, theme, towards }) => (
       //tongue
       ctx.beginPath();
       ctx.translate(17, 10);
+      ctx.rotate(((x + y) % 2 ? 350 : 20) * TO_RADIANS);
       ctx.moveTo(6, -3);
       ctx.lineTo(0, 0);
       ctx.lineTo(6, 2);

@@ -33,7 +33,7 @@ function random(low, high) {
   return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
-const TO_RADIANS = Math.PI / 180;
+export const TO_RADIANS = Math.PI / 180;
 
 export const radianFromSide = {
   left: 180 * TO_RADIANS,
