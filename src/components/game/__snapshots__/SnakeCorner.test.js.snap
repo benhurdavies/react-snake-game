@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SnakeCorner renders correctly 1`] = `
+<Shape
+  sceneFunc={[Function]}
+  x={200}
+  y={200}
+/>
+`;

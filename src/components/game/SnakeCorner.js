@@ -4,7 +4,6 @@ import { Shape } from 'react-konva';
 import { radianFromCorner } from '../../util/helper';
 
 const SnakeCorner = ({ x, y, corner, blockSize, theme }) => {
-  debugger;
   return (
     <Shape
       x={x * blockSize}
